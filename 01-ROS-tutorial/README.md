@@ -10,4 +10,4 @@
       * CMakeLists.txt
       * package.xml
 
-![tutorial](https://docs.google.com/document/d/1qNqn1rMPQP1PUJdTilZlf7ZoYXegxN3j0-clh32kZhQ/edit?usp=sharing)
+[tutorial](https://docs.google.com/document/d/1qNqn1rMPQP1PUJdTilZlf7ZoYXegxN3j0-clh32kZhQ/edit?usp=sharing)
