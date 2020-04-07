@@ -1,5 +1,8 @@
 # HCC-Lab-2020, lab1, ROS tutorial
 
+[Tutorial](https://docs.google.com/document/d/1qNqn1rMPQP1PUJdTilZlf7ZoYXegxN3j0-clh32kZhQ/edit?usp=sharing)
+
+
 ### File system
 * catkin_ws: workspace
   * src: packages inside
@@ -10,4 +13,3 @@
       * CMakeLists.txt
       * package.xml
 
-[tutorial](https://docs.google.com/document/d/1qNqn1rMPQP1PUJdTilZlf7ZoYXegxN3j0-clh32kZhQ/edit?usp=sharing)

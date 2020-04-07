@@ -44,8 +44,8 @@ docker run -it \
     -e DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
     -e XAUTHORITY=$XAUTH \
-    -e ROS_MASTER_URI=$ROS_MASTER_URI \
-    -e ROS_IP=$ROS_IP \
+    # -e ROS_MASTER_URI=$ROS_MASTER_URI \
+    # -e ROS_IP=$ROS_IP \
     -v "$XAUTH:$XAUTH" \
     -v "/home/$USER/HCC-Lab-2020:/home/hcc2020/HCC-Lab-2020" \
     -v "/tmp/.X11-unix:/tmp/.X11-unix" \
