@@ -29,7 +29,8 @@ if dpkg --compare-versions 19.03 gt "$DOCKER_VER"; then
     fi
     DOCKER_OPTS="$DOCKER_OPTS --runtime=nvidia"
 else
-    DOCKER_OPTS="$DOCKER_OPTS --gpus all"
+    # DOCKER_OPTS="$DOCKER_OPTS --gpus all"
+    echo "No GPU"
 fi
 
 # Prevent executing "docker run" when xauth failed.
