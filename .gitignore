@@ -1,0 +1,17 @@
+.catkin_workspace
+build/
+devel/
+.vscode
+*.pth
+*.pkl
+catkin_ws/bin/
+catkin_ws/include/
+catkin_ws/lib/
+catkin_ws/share/
+.catkin_tools/
+*.swp
+*.pyc
+f_cost.txt
+*.graph
+CATKIN_IGNORE
+*.so
