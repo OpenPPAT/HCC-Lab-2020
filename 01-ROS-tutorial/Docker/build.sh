@@ -1,3 +1,3 @@
 #!/bin/sh
-docker build --rm -t argnctu/hcc2020:ros . --no-cache
+docker build --rm -t argnctu/hcc2020:ros .
 
