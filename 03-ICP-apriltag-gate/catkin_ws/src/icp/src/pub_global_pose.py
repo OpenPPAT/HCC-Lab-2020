@@ -12,12 +12,6 @@ import numpy as np
 from tf import transformations as tr
 import math
 
-# gp1 = np.array([0.4865, 1.3275, 0.5955])
-# gp2 = np.array([0.4895, 0.251, 2.74]) 
-# gp3 = np.array([0.505, -1.3155, 1.0965])
-# tags = [4, 5, 6]
-# A_points = {4: gp1, 5: gp2, 6: gp3}
-
 gp1 = np.array([0.501, 1.326, 0.596])
 gp2 = np.array([0.4675, 0.2515, 2.686]) 
 gp3 = np.array([0.4835, -1.34, 1.092])
@@ -26,27 +20,6 @@ A_points = {24: gp1, 25: gp2, 26: gp3}
 
 
 T_GtoP = []
-
-# def isclose(x, y, rtol=1.e-5, atol=1.e-8):
-#     return abs(x-y) <= atol + rtol * abs(y)
-# def euler_angles_from_rotation_matrix(R):
-#     '''
-#     From a paper by Gregory G. Slabaugh (undated),
-#     "Computing Euler angles from a rotation matrix
-#     '''
-#     phi = 0.0
-#     if isclose(R[2,0],-1.0):
-#         theta = math.pi/2.0
-#         psi = math.atan2(R[0,1],R[0,2])
-#     elif isclose(R[2,0],1.0):
-#         theta = -math.pi/2.0
-#         psi = math.atan2(-R[0,1],-R[0,2])
-#     else:
-#         theta = -math.asin(R[2,0])
-#         cos_theta = math.cos(theta)
-#         psi = math.atan2(R[2,1]/cos_theta, R[2,2]/cos_theta)
-#         phi = math.atan2(R[1,0]/cos_theta, R[0,0]/cos_theta)
-#     return psi, theta, phi
 
 def get_transform(p):
 

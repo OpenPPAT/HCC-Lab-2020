@@ -2,8 +2,9 @@
 
 ARGS=("$@")
 
+# Make sure processes in the container can connect to the x server
+# Necessary so gazebo can create a context for OpenGL rendering (even headless)
 XAUTH=/tmp/.docker.xauth
-
 if [ ! -f $XAUTH ]; then
     xauth_list=$(xauth nlist $DISPLAY)
     xauth_list=$(sed -e 's/^..../ffff/' <<<"$xauth_list")
@@ -15,16 +16,13 @@ if [ ! -f $XAUTH ]; then
     chmod a+r $XAUTH
 fi
 
-# Prevent executing "docker run" when xauth failed.
-if [ ! -f $XAUTH ]; then
-    echo "[$XAUTH] was not properly created. Exiting..."
-    exit 1
-fi
+BASH_OPTION=bash
 
-xhost +
 docker run -it \
     -e DISPLAY \
-    --device=/dev/dri:/dev/dri \
+    -e QT_X11_NO_MITSHM=1 \
+    -e XAUTHORITY=$XAUTH \
+    -v "$XAUTH:$XAUTH" \
     -v "/home/$USER/HCC-Lab-2020:/home/hcc2020/HCC-Lab-2020" \
     -v "/tmp/.X11-unix:/tmp/.X11-unix" \
     -v "/etc/localtime:/etc/localtime:ro" \
@@ -35,5 +33,6 @@ docker run -it \
     --network host \
     --rm \
     --privileged \
+    --security-opt seccomp=unconfined \
     argnctu/hcc2020:ros \
-    bash
+    $BASH_OPTION

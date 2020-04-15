@@ -80,7 +80,16 @@ ENTRYPOINT ["/ros_entrypoint.sh"]
 RUN pip2 install --upgrade pip setuptools
 
 RUN pip2 install  \
-    numpy
+    numpy \
+    pyyaml
+
+RUN pip3 install --upgrade pip setuptools
+
+RUN pip3 install  \
+    numpy \
+    rospkg \
+    catkin-tools \
+    pyyaml
 
 
 # install packages
@@ -102,6 +111,11 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=t
     ros-melodic-interactive-marker-twist-server \
     ros-melodic-teleop-twist-joy \
     ros-melodic-ddynamic-reconfigure \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=true install -q -y \
+    mesa-utils \
+    libosmesa6-dev \
     && rm -rf /var/lib/apt/lists/*
 
 USER ${NB_USER}
