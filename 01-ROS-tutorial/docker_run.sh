@@ -16,22 +16,6 @@ if [ ! -f $XAUTH ]; then
     chmod a+r $XAUTH
 fi
 
-DOCKER_OPTS=
-
-# Get the current version of docker-ce
-# Strip leading stuff before the version number so it can be compared
-DOCKER_VER=$(dpkg-query -f='${Version}' --show docker-ce | sed 's/[0-9]://')
-if dpkg --compare-versions 19.03 gt "$DOCKER_VER"; then
-    echo "Docker version is less than 19.03, using nvidia-docker2 runtime"
-    if ! dpkg --list | grep nvidia-docker2; then
-        echo "Please either update docker-ce to a version greater than 19.03 or install nvidia-docker2"
-        exit 1
-    fi
-    DOCKER_OPTS="$DOCKER_OPTS --runtime=nvidia"
-else
-    # DOCKER_OPTS="$DOCKER_OPTS --gpus all"
-    echo "No GPU"
-fi
 
 # Prevent executing "docker run" when xauth failed.
 if [ ! -f $XAUTH ]; then
@@ -57,6 +41,5 @@ docker run -it \
     --rm \
     --privileged \
     --security-opt seccomp=unconfined \
-    $DOCKER_OPTS \
     argnctu/hcc2020:ros \
     $BASH_OPTION
