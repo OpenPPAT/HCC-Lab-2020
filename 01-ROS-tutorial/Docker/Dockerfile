@@ -76,12 +76,24 @@ COPY ./ros_entrypoint.sh /
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 
+#################################### GTSAM ####################################
+
+RUN cd ${HOME}/ \
+    && git clone https://github.com/borglab/gtsam.git \
+    && cd gtsam/ \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && make install
+
 
 RUN pip2 install --upgrade pip setuptools
 
 RUN pip2 install  \
     numpy \
-    pyyaml
+    pyyaml \
+    sklearn \
+    jupyter 
 
 RUN pip3 install --upgrade pip setuptools
 
@@ -95,6 +107,7 @@ RUN pip3 install  \
 # install packages
 RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=true install -q -y \
     net-tools \
+    ros-melodic-pcl-ros \
     ros-melodic-perception \
     ros-melodic-rgbd-launch \
     ros-melodic-joystick-drivers \
@@ -113,10 +126,9 @@ RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=t
     ros-melodic-ddynamic-reconfigure \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get -o Acquire::ForceIPv4=true update && apt-get -o Acquire::ForceIPv4=true install -q -y \
-    mesa-utils \
-    libosmesa6-dev \
-    && rm -rf /var/lib/apt/lists/*
+##################################### TAIL #####################################
+RUN chown -R ${NB_USER}:${NB_USER} ${HOME}/
+RUN echo "${NB_USER} ALL=(ALL)  ALL" > /etc/sudoers
 
 USER ${NB_USER}
 
