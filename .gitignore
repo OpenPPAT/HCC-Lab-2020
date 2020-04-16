@@ -16,3 +16,4 @@ f_cost.txt
 CATKIN_IGNORE
 *.so
 *.bag
+.ipynb_checkpoints
