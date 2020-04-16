@@ -25,9 +25,9 @@ class ICP(object):
             "tag_detections", AprilTagDetectionArray, self.cb_detection, queue_size=1)
 
     def centroid(self, points):
-        x = np.sum(points[0, :])/3
-        y = np.sum(points[1, :])/3
-        z = np.sum(points[2, :])/3
+        x = np.mean(points[:, 0])
+        y = np.mean(points[:, 1])
+        z = np.mean(points[:, 2])
         return np.array([x, y, z])
 
     def de_mean(self, points, centroid):
@@ -61,10 +61,12 @@ class ICP(object):
                 tag_position = np.matmul(self.camera2foot, tag_tf)[0:3, 3]
                 tag_poses.append(tag_position)
             tag_poses = np.array(tag_poses)
+           
 
             # calculate centroid
             c_tag = self.centroid(tag_poses)
             c_gate = self.centroid(self.gate_poses)
+           
 
             # de mean
             m_tag = self.de_mean(tag_poses, c_tag)
@@ -76,22 +78,25 @@ class ICP(object):
             # SVD decompose
             U, D, V = np.linalg.svd(H)
 
-            # get Rotation
-            rotation = np.matmul(U, V)
-            translation = c_gate - np.matmul(rotation, c_tag)
+            # get Rotation & Translation
+            rotation = np.dot(U, V)
+            translation = c_gate - np.dot(rotation, c_tag)
 
             trans0 = np.hstack((rotation[0], translation[0]))
             trans1 = np.hstack((rotation[1], translation[1]))
             trans2 = np.hstack((rotation[2], translation[2]))
-            trans3 = np.zeros(4)
-            trans3[3] = 1
+            trans3 = np.array([0,0,0,1])
             trans = np.vstack((trans0, trans1, trans2, trans3))
 
             quat = tf.transformations.quaternion_from_matrix(trans)
+            quat = quat/np.linalg.norm(quat) # normalization
+
+            print(trans)
+            print('--------------------------------')
+
             self.broadcaster.sendTransform(
                 translation, quat, rospy.Time.now(), "global", "map")
 
-            print(quat)
 
 
 if __name__ == "__main__":
