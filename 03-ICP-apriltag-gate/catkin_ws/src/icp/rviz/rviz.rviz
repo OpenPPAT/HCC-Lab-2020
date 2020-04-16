@@ -78,7 +78,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 250
+      Max Intensity: 227
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: PointCloud2
@@ -124,11 +124,17 @@ Visualization Manager:
           Value: true
         camera_middle_color_optical_frame:
           Value: true
+        global:
+          Value: true
         laser_odom:
           Value: true
         map:
           Value: true
         tag24:
+          Value: true
+        tag25:
+          Value: true
+        tag26:
           Value: true
         tag27:
           Value: true
@@ -160,6 +166,10 @@ Visualization Manager:
                   camera_middle_color_optical_frame:
                     tag24:
                       {}
+                    tag25:
+                      {}
+                    tag26:
+                      {}
                     tag27:
                       {}
                     tag4:
@@ -174,6 +184,8 @@ Visualization Manager:
                   {}
             laser_odom:
               {}
+          global:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -185,13 +197,13 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz/PointCloud2
-      Color: 25; 255; 0
-      Color Transformer: FlatColor
+      Color: 255; 255; 255
+      Color Transformer: Intensity
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 15.174750328063965
+      Max Intensity: 15.178750038146973
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: PointCloud2
@@ -229,7 +241,7 @@ Visualization Manager:
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.05000000074505806
+      Size (m): 0.07999999821186066
       Style: Flat Squares
       Topic: /key_pose_origin
       Unreliable: false
@@ -264,25 +276,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 48.68864822387695
+      Distance: 34.282142639160156
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -3.7834572792053223
-        Y: -1.8468947410583496
-        Z: -2.7838854293804616e-5
+        X: 5.541996002197266
+        Y: 1.985593318939209
+        Z: -2.5931505660992116e-5
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.0197968482971191
+      Pitch: 1.2047966718673706
       Target Frame: <Fixed Frame>
       Value: ThirdPersonFollower (rviz)
-      Yaw: 3.0536394119262695
+      Yaw: 5.365485191345215
     Saved: ~
 Window Geometry:
   Displays:

@@ -75,10 +75,9 @@ class ICP(object):
 
             # SVD decompose
             U, D, V = np.linalg.svd(H)
-            
 
             # get Rotation
-            rotation = np.matmul(V, U.T)
+            rotation = np.matmul(U, V)
             translation = c_gate - np.matmul(rotation, c_tag)
 
             trans0 = np.hstack((rotation[0], translation[0]))
