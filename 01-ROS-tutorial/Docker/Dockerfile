@@ -93,7 +93,15 @@ RUN pip2 install  \
     numpy \
     pyyaml \
     sklearn \
-    jupyter 
+    jupyter \
+    torch \
+    torchvision \
+    matplotlib \
+    pandas \
+    scikit-image \
+    scikit-learn \
+    future  \
+    gdown
 
 RUN pip3 install --upgrade pip setuptools
 
