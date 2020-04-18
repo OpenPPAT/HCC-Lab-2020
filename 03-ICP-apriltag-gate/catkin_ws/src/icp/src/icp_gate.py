@@ -25,9 +25,21 @@ class ICP(object):
         self.trans_mean = np.zeros(3)
         self.orien_mean = np.zeros(4)
 
-        # map/base_footprint 2 camera_color_optical_frame
-        trans_c = [0.506, 0.033, 0.425]
-        rot_c = [-0.430, 0.430, -0.561, 0.561]
+        # base_footprint 2 camera_color_optical_frame
+        # Hint : find transform using 
+        #       $ rosrun tf tf_echo XXX  XXX
+        #################################################
+        #                                               #
+        #                                               #
+        #                                               #
+        #trans_c = [XXX, XXX, XXX]                      #
+        #rot_c = [XXX, XXX, XXX, XXX]                   #
+        #                                               #
+        #                                               #
+        #                                               #
+        #                                               #
+        #################################################
+
         self.camera2foot = tf.transformations.concatenate_matrices(
             tf.transformations.translation_matrix(trans_c), tf.transformations.quaternion_matrix(rot_c))
 
@@ -49,28 +61,22 @@ class ICP(object):
         return data
 
     def best_fit_transform(self, model, target):
-        # calculate centroid
-        c_target = np.mean(target, axis=0)
-        c_model = np.mean(model, axis=0)
-
-        # de mean
-        m_target = (target-c_target).T
-        m_model = (model-c_model).T
-
-        # calculate correlation matrix
-        H = np.matmul(m_target, m_model.T)
-
-        # SVD decompose
-        U, D, V = np.linalg.svd(H)
-
-        # get Rotation & Translation
-        rotation = np.dot(U, V)
-        translation = c_model - np.dot(rotation, c_target)
-
-        # combine matrix
-        transform = np.identity(target.shape[1]+1)
-        transform[0:target.shape[1], 0:target.shape[1]] = rotation
-        transform[0:target.shape[1], target.shape[1]] = translation
+        ######################################################
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #          implement your 3d best transform          #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        #                                                    #
+        ######################################################
 
         return transform
 
@@ -127,7 +133,6 @@ class ICP(object):
                 self.broadcaster.sendTransform(
                     translation, quat, rospy.Time.now(), "map", "tmp_global")
 
-            
             if self.count == MAX_DETECT:
                 # remove outlier using one class SVM
                 self.translations = self.remove_outlier(self.translations)
@@ -136,7 +141,8 @@ class ICP(object):
                 # calculate mean
                 self.trans_mean = np.mean(self.translations, axis=0)
                 self.orien_mean = np.mean(self.orientations, axis=0)
-                self.orien_mean = self.orien_mean/np.linalg.norm(self.orien_mean)  # normalization
+                self.orien_mean = self.orien_mean / \
+                    np.linalg.norm(self.orien_mean)  # normalization
 
                 rospy.loginfo('%d translation is used' %
                               self.translations.shape[0])

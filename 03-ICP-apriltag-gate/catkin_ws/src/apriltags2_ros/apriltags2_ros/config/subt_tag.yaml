@@ -4,9 +4,4 @@ standalone_tags:
     { id: 5, size: 0.2286, name: tag5 },
     { id: 6, size: 0.2286, name: tag6 },
     { id: 7, size: 0.2286, name: tag7 },
-
-    { id: 24, size: 0.2286, name: tag24 },
-    { id: 25, size: 0.2286, name: tag25 },
-    { id: 26, size: 0.2286, name: tag26 },
-    { id: 27, size: 0.2286, name: tag27 },
   ]
