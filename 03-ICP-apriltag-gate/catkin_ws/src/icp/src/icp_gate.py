@@ -25,7 +25,7 @@ class ICP(object):
         self.trans_mean = np.zeros(3)
         self.orien_mean = np.zeros(4)
 
-        # base_footprint 2 camera_color_optical_frame
+        # base_footprint to camera_color_optical_frame
         # Hint : find transform using 
         #       $ rosrun tf tf_echo XXX  XXX
         #################################################
